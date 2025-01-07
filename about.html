@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock title %}
+
+{% block body %}
+<div class="container my-4">
+    <h2 class="text-center mb-4 display-4 text-primary">About My Todo App</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3 shadow-sm hover-card">
+                <div class="card-body">
+                    <h3 class="card-title text-info"><i class="fas fa-star"></i> App Features</h3>
+                    <ul class="list-group list-group-flush animate-list">
+                        <li class="list-group-item hover-item">✨ Create and manage todos</li>
+                        <li class="list-group-item hover-item">🔄 Update existing todos</li>
+                        <li class="list-group-item hover-item">🗑️ Delete completed todos</li>
+                        <li class="list-group-item hover-item">🔍 Search functionality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-3 shadow-sm hover-card">
+                <div class="card-body">
+                    <h3 class="card-title text-success"><i class="fas fa-chart-line"></i> Live Statistics</h3>
+                    <ul class="list-group list-group-flush animate-list">
+                        <li class="list-group-item hover-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>📊 Total Todos</span>
+                                <span class="badge bg-primary rounded-pill">{{ stats.total_todos }}</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item hover-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>📝 Active Todos</span>
+                                <span class="badge bg-success rounded-pill">{{ stats.active_todos }}</span>
+                            </div>
+                        </li>
+                        {% if stats.latest_todo %}
+                        <li class="list-group-item hover-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>🕒 Latest Todo</span>
+                                <span class="text-muted">{{ stats.latest_todo.title }}</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item hover-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>⏰ App Started</span>
+                                <span class="text-muted">{{ stats.app_started }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4 shadow hover-card">
+        <div class="card-body">
+            <h3 class="card-title text-center text-primary mb-4"><i class="fas fa-tools"></i> Technologies Used</h3>
+            <div class="row text-center">
+                <div class="col-md-3 tech-card">
+                    <div class="p-3 rounded hover-item" data-bs-toggle="modal" data-bs-target="#flaskModal" style="cursor: pointer;">
+                        <i class="fab fa-python fa-2x text-primary mb-2"></i>
+                        <h5>Flask</h5>
+                        <p class="text-muted">Web Framework</p>
+                    </div>
+                </div>
+                <div class="col-md-3 tech-card">
+                    <div class="p-3 rounded hover-item" data-bs-toggle="modal" data-bs-target="#sqlalchemyModal" style="cursor: pointer;">
+                        <i class="fas fa-database fa-2x text-success mb-2"></i>
+                        <h5>SQLAlchemy</h5>
+                        <p class="text-muted">Database ORM</p>
+                    </div>
+                </div>
+                <div class="col-md-3 tech-card">
+                    <div class="p-3 rounded hover-item" data-bs-toggle="modal" data-bs-target="#bootstrapModal" style="cursor: pointer;">
+                        <i class="fab fa-bootstrap fa-2x text-purple mb-2"></i>
+                        <h5>Bootstrap</h5>
+                        <p class="text-muted">Frontend Design</p>
+                    </div>
+                </div>
+                <div class="col-md-3 tech-card">
+                    <div class="p-3 rounded hover-item" data-bs-toggle="modal" data-bs-target="#sqliteModal" style="cursor: pointer;">
+                        <i class="fas fa-server fa-2x text-info mb-2"></i>
+                        <h5>SQLite</h5>
+                        <p class="text-muted">Database</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+    
+    .hover-item:hover {
+        background-color: #f8f9fa;
+        transform: scale(1.02);
+        transition: all 0.2s ease;
+    }
+    
+    .tech-card {
+        transition: all 0.3s ease;
+    }
+    
+    .tech-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .animate-list li {
+        animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .bg-purple {
+        background-color: #7952b3;
+    }
+    
+    .text-purple {
+        color: #7952b3;
+    }
+</style>
+
+<!-- Flask Modal -->
+<div class="modal fade" id="flaskModal" tabindex="-1" aria-labelledby="flaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="flaskModalLabel"><i class="fab fa-python"></i> Flask Framework</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Flask</strong> is a lightweight WSGI web application framework in Python. It's designed to be simple and easy to use, allowing developers to start small and scale up to complex applications.</p>
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Built-in development server and debugger</li>
+                    <li>RESTful request dispatching</li>
+                    <li>Jinja2 templating</li>
+                    <li>Secure cookies support</li>
+                    <li>Unit testing support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SQLAlchemy Modal -->
+<div class="modal fade" id="sqlalchemyModal" tabindex="-1" aria-labelledby="sqlalchemyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="sqlalchemyModalLabel"><i class="fas fa-database"></i> SQLAlchemy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>SQLAlchemy</strong> is a Python SQL toolkit and Object Relational Mapper (ORM) that gives developers the full power and flexibility of SQL.</p>
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Object Relational Mapping (ORM)</li>
+                    <li>Schema Migration Tools</li>
+                    <li>Database Agnostic</li>
+                    <li>Connection Pooling</li>
+                    <li>Powerful Query Builder</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="bootstrapModal" tabindex="-1" aria-labelledby="bootstrapModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-purple text-white">
+                <h5 class="modal-title" id="bootstrapModalLabel"><i class="fab fa-bootstrap"></i> Bootstrap</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Bootstrap</strong> is the world's most popular framework for building responsive, mobile-first sites.</p>
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Responsive Grid System</li>
+                    <li>Pre-styled Components</li>
+                    <li>JavaScript Plugins</li>
+                    <li>Customizable Themes</li>
+                    <li>Cross-browser Compatibility</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SQLite Modal -->
+<div class="modal fade" id="sqliteModal" tabindex="-1" aria-labelledby="sqliteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="sqliteModalLabel"><i class="fas fa-server"></i> SQLite</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>SQLite</strong> is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.</p>
+                <h6>Key Features:</h6>
+                <ul>
+                    <li>Serverless Architecture</li>
+                    <li>Zero Configuration</li>
+                    <li>Self-contained</li>
+                    <li>Highly Reliable</li>
+                    <li>ACID Compliant</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %} 

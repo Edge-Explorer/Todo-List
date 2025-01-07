@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Update Todo{% endblock title %}
+
+{% block body %}
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg hover-card">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">
+                        <i class="fas fa-edit"></i> Update Todo
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form action="/update/{{todo.sno}}" method="POST">
+                        <div class="mb-4">
+                            <label for="title" class="form-label">
+                                <i class="fas fa-heading"></i> Title
+                            </label>
+                            <input type="text" class="form-control form-control-lg" 
+                                   id="title" name="title" value="{{todo.title}}"
+                                   placeholder="Enter todo title">
+                        </div>
+                        <div class="mb-4">
+                            <label for="desc" class="form-label">
+                                <i class="fas fa-align-left"></i> Description
+                            </label>
+                            <textarea class="form-control" id="desc" name="desc" 
+                                      rows="4" placeholder="Enter todo description">{{todo.desc}}</textarea>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="/" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save"></i> Update Todo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <i class="far fa-clock"></i> Last modified: {{todo.date_created.strftime('%Y-%m-%d %H:%M')}}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    }
+    
+    .form-control:focus {
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.25rem rgba(255,193,7,.25);
+    }
+    
+    .card-header {
+        background-color: #fff3cd !important;
+        border-bottom: 2px solid #ffc107;
+    }
+    
+    textarea {
+        resize: none;
+    }
+    
+    /* Animated placeholder */
+    .form-control::placeholder {
+        transition: opacity 0.3s ease;
+    }
+    
+    .form-control:focus::placeholder {
+        opacity: 0.5;
+    }
+    
+    /* Button hover effects */
+    .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Card animation */
+    .card {
+        animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock body %}
